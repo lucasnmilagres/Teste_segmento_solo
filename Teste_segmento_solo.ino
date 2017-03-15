@@ -1,20 +1,20 @@
+/* Main Cpp
+written by LucasNMilagres
+*/
+#include "ComunicacaoSerial.h"
+
+ComunicacaoSerial comunicacaoSerial;
+
 void setup() {
   Serial.begin(9600);
 }
 
 void loop() {
-  serialEventRun();
-}
+  //Aguarda a recepção da solicitação de conexão
+  comunicacaoSerial.responderConexao('K');
 
-void serialEventRun(void) {
-  if (Serial.available()) 
-    serialEvent();
+  //Roda a atividade
+  while(1)
+    comunicacaoSerial.run();
 }
-
-void serialEvent(){
-    //Se a mensagem recebida for igual a S, responde com um K
-    if('S'==Serial.read())
-      Serial.write("K");      
-}
-
 
