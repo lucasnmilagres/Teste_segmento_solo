@@ -14,6 +14,7 @@ class ComunicacaoSerial
   void run();
   String stringToCansat(String msg);
   void enviarDados(String msg);
+  String getValue(String data, char separator, int index);
 };
 
 #endif
