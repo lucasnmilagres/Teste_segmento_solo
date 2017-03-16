@@ -57,7 +57,7 @@ void SimulacaoDados::calcularDados(){
 }
 
 //Traduz do protocolo de string para o protocolo padrão do projeto. Aplicável somente ao teste
-String ComunicacaoSerial::toCansat(){
+String SimulacaoDados::toCansat(){
 
   //Criar mensagem com os caracteres correspondentes aos bytes de cada dado
   msg="";
@@ -98,5 +98,13 @@ String ComunicacaoSerial::toCansat(){
   msg.concat((char)paridade);
 
   return msg;
+}
+
+//Verifica se o tempo máximo de execução foi atingido
+bool SimulacaoDados::encerrarExecucao(){
+  if(hora*3600+minuto*60+segundo>=TEMPO_MAX_TRANS)
+    return true;
+  else
+    return false;
 }
 
