@@ -60,7 +60,7 @@ void SimulacaoDados::calcularDados(){
 String SimulacaoDados::toCansat(){
 
   //Criar mensagem com os caracteres correspondentes aos bytes de cada dado
-  msg="";
+  String msg="";
   msg.concat((char)highByte(inicio));
   msg.concat((char)lowByte(inicio));
   msg.concat((char)highByte(luminosidade));
@@ -82,10 +82,10 @@ String SimulacaoDados::toCansat(){
   //Calcular a quantidade de bits setados na mensagem
   int bits_setados=0;
   for(int i=0;i<msg.length();i++){
-    byte letra = (byte)msg.toCharArray()[i];
+    byte letra = (byte)msg.charAt(i);
     
     for(int j=0; j<8; j++)
-      if(String(letra).toCharArray[j]=='1')
+      if(String(letra).charAt(j)=='1')
         bits_setados++;
   }
 

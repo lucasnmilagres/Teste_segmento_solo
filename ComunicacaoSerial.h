@@ -11,7 +11,6 @@ class ComunicacaoSerial
   public:
   ComunicacaoSerial(void);
   void responderConexao(char msgResposta);
-  void run();
   void enviarDados(String msg);
 };
 
