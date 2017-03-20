@@ -8,7 +8,7 @@ written by LucasNMilagres
 #define GROWTH_CONST_TEMP 3000 //Taxa de tranferencia do calor [segundos]
 #define GROWTH_CONST_PRES 7000 //Constante de crescimento da pressão [metros]
 
-SimulacaoDados::SimulacaoDados(void){}
+SimulacaoDados::SimulacaoDados(void){hora=21; minuto=48;}
 
 //Calcula os dados de um pacote, de acordo com a função determinada para cada uma das variáveis
 void SimulacaoDados::calcularDados(){
@@ -53,7 +53,7 @@ void SimulacaoDados::calcularDados(){
   velocidade=-2*(hora*3600+minuto*60+segundo)+TEMPO_MAX_TRANS;
 
   //Função de cálculo da aceleracao [Constante a partir da segunda derivada da altitude, desprezando o deslocamento horizontal (o qual ocorre em MRUA)]
-  aceleracao=-2; 
+  aceleracao=-2;   
 }
 
 //Traduz do protocolo de string para o protocolo padrão do projeto. Aplicável somente ao teste
@@ -63,17 +63,19 @@ String SimulacaoDados::toCansat(){
   String msg="";
   msg.concat((char)highByte(inicio));
   msg.concat((char)lowByte(inicio));
-  msg.concat((char)highByte(luminosidade));
   msg.concat((char)lowByte(luminosidade));
+  msg.concat((char)highByte(luminosidade));
   msg.concat(temp_externa);
   msg.concat(temp_interna);
   msg.concat((char)pressao);
-  msg.concat((char)highByte(aceleracao));
   msg.concat((char)lowByte(aceleracao));
-  msg.concat((char)longitude);
-  msg.concat((char)latitude);
-  msg.concat((char)highByte(altitude));
+  msg.concat((char)highByte(aceleracao));
+  msg.concat((char)lowByte(longitude));
+  msg.concat((char)highByte(longitude));
+  msg.concat((char)lowByte(latitude));
+  msg.concat((char)highByte(latitude));
   msg.concat((char)lowByte(altitude));
+  msg.concat((char)highByte(altitude));
   msg.concat((char)hora);
   msg.concat((char)minuto);
   msg.concat((char)segundo);
