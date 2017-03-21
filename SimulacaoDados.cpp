@@ -8,7 +8,7 @@ written by LucasNMilagres
 #define GROWTH_CONST_TEMP 3000 //Taxa de tranferencia do calor [segundos]
 #define GROWTH_CONST_PRES 7000 //Constante de crescimento da pressão [metros]
 
-SimulacaoDados::SimulacaoDados(void){hora=21; minuto=48;}
+SimulacaoDados::SimulacaoDados(void){hora=13; minuto=30;altitude=0;latitude=0;longitude=0;temp_externa=0;temp_interna=0;luminosidade=0;pressao=0;velocidade=0;aceleracao=0;}
 
 //Calcula os dados de um pacote, de acordo com a função determinada para cada uma das variáveis
 void SimulacaoDados::calcularDados(){
@@ -29,31 +29,38 @@ void SimulacaoDados::calcularDados(){
     segundo++;
     
   //Função de cálculo da latitude (Aproximação linear)
-  latitude+=0.0001;
+  latitude+=1;
 
   //Função de cálculo da longitude (Aproximação linear)
-  longitude+=0.0001; 
+  longitude+=2; 
 
   //Função de cálculo da altitude (Aproximação parábola)
-  altitude=-pow(hora*3600+minuto*60+segundo,2)+TEMPO_MAX_TRANS*(hora*3600+minuto*60+segundo);
+  //altitude=-pow(hora*3600+minuto*60+segundo,2)+TEMPO_MAX_TRANS*(hora*3600+minuto*60+segundo);
+  altitude+=3;
  
   //Função de cálculo da tempExterna (Aproximação parábola)
-  temp_externa=0.19*pow(altitude,2)-7.6*altitude+20; 
+  //temp_externa=0.19*pow(altitude,2)-7.6*altitude+20; 
+  temp_externa+=4;
 
   //Função de cálculo da tempInerna (Aproximação exponencial da externa)
-  temp_interna=temp_externa-(temp_externa-temp_interna)*exp(((float)-1)/((float)GROWTH_CONST_TEMP));  
+  //temp_interna=temp_externa-(temp_externa-temp_interna)*exp(((float)-1)/((float)GROWTH_CONST_TEMP));  
+  temp_interna+=5;
 
   //Função de cálculo da lumExterna (Constante)
-  luminosidade=43000; 
+  //luminosidade=43000; 
+  luminosidade+=6;
 
   //Função de cálculo da pressaoAtm (Aproximação exponencial)
-  pressao=(101.325)*exp((-altitude)/((float)GROWTH_CONST_PRES)); 
+  //pressao=(101.325)*exp((-altitude)/((float)GROWTH_CONST_PRES)); 
+  pressao+=7;
 
   //Função de cálculo da velocidade [Constante a partir da primeira derivada da altitude, desprezando o deslocamento horizontal (o qual ocorre em MRUA)]
-  velocidade=-2*(hora*3600+minuto*60+segundo)+TEMPO_MAX_TRANS;
+  //velocidade=-2*(hora*3600+minuto*60+segundo)+TEMPO_MAX_TRANS;
+  velocidade+=8;
 
   //Função de cálculo da aceleracao [Constante a partir da segunda derivada da altitude, desprezando o deslocamento horizontal (o qual ocorre em MRUA)]
-  aceleracao=-2;   
+  //aceleracao=-2;   
+  aceleracao+=9;
 }
 
 //Traduz do protocolo de string para o protocolo padrão do projeto. Aplicável somente ao teste

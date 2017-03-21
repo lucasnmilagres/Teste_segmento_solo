@@ -17,7 +17,7 @@ void loop() {
 
   while(!dados.encerrarExecucao()){
     //Aproxima o tempo simulado do tempo real
-    delay(500);
+    delay(1000);
 
     //Roda a simulação
     dados.calcularDados();
