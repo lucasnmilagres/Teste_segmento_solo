@@ -3,15 +3,10 @@ written by LucasNMilagres
 */
 #include "SimulacaoDados.h"
 
-//Defines
-#define TEMPO_MAX_TRANS 30000 //Tempo máximo de transmissão [segundos]
-#define GROWTH_CONST_TEMP 3000 //Taxa de tranferencia do calor [segundos]
-#define GROWTH_CONST_PRES 7000 //Constante de crescimento da pressão [metros]
-
-SimulacaoDados::SimulacaoDados(void){hora=13; minuto=30;altitude=0;latitude=0;longitude=0;temp_externa=0;temp_interna=0;luminosidade=0;pressao=0;velocidade=0;aceleracao=0;}
+SimulacaoDados::SimulacaoDados(void){hora=15; minuto=6;segundo=0;altitude=0;latitude=0;longitude=0;temp_externa=0;temp_interna=0;luminosidade=0;pressao=0;velocidade=0;aceleracao=0;}
 
 //Calcula os dados de um pacote, de acordo com a função determinada para cada uma das variáveis
-void SimulacaoDados::calcularDados(){
+String SimulacaoDados::calcularDados(){   
   //Função de cálculo do tempo (Aproximação linear)
   if(segundo==59)
   {
@@ -27,7 +22,7 @@ void SimulacaoDados::calcularDados(){
   }
   else
     segundo++;
-    
+  
   //Função de cálculo da latitude (Aproximação linear)
   latitude+=1;
 
@@ -61,6 +56,9 @@ void SimulacaoDados::calcularDados(){
   //Função de cálculo da aceleracao [Constante a partir da segunda derivada da altitude, desprezando o deslocamento horizontal (o qual ocorre em MRUA)]
   //aceleracao=-2;   
   aceleracao+=9;
+
+  String msg=toCansat();
+  return msg;
 }
 
 //Traduz do protocolo de string para o protocolo padrão do projeto. Aplicável somente ao teste
@@ -108,12 +106,3 @@ String SimulacaoDados::toCansat(){
 
   return msg;
 }
-
-//Verifica se o tempo máximo de execução foi atingido
-bool SimulacaoDados::encerrarExecucao(){
-  if(hora*3600+minuto*60+segundo>=TEMPO_MAX_TRANS)
-    return true;
-  else
-    return false;
-}
-

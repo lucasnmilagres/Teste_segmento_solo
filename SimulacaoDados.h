@@ -18,9 +18,8 @@ class SimulacaoDados
 
   public:
   SimulacaoDados(void);
-  void calcularDados();
+  String calcularDados();
   String toCansat(); 
-  bool encerrarExecucao();
 };
 
 #endif

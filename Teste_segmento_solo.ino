@@ -5,23 +5,27 @@ written by LucasNMilagres
 #include "SimulacaoDados.h"
 
 ComunicacaoSerial comunicacaoSerial;
-SimulacaoDados dados;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
 }
 
 void loop() {
   //Aguarda a recepção da solicitação de conexão
   comunicacaoSerial.responderConexao('K');
 
-  while(!dados.encerrarExecucao()){
+  SimulacaoDados dados=SimulacaoDados();
+
+  while(true){
     //Aproxima o tempo simulado do tempo real
-    delay(1000);
+    delay(54000);
 
     //Roda a simulação
-    dados.calcularDados();
-    comunicacaoSerial.enviarDados(dados.toCansat());
+    for(int i=0; i<120; i++)
+    {
+      delay(50);
+      comunicacaoSerial.enviarDados(dados.calcularDados());
+    }
   }
 }
 
