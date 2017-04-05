@@ -88,13 +88,10 @@ String SimulacaoDados::toCansat(){
 
   //Calcular a quantidade de bits setados na mensagem
   int bits_setados=0;
-  for(int i=0;i<msg.length();i++){
-    byte letra = (byte)msg.charAt(i);
-    
+  for(int i=0;i<msg.length();i++)    
     for(int j=0; j<8; j++)
-      if(String(letra).charAt(j)=='1')
+      if(bitRead((byte)msg.charAt(i),j)==1)
         bits_setados++;
-  }
 
   //Determina a paridade
   if((bits_setados%2)==0)
