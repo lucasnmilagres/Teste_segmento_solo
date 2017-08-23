@@ -18,10 +18,10 @@ void loop() {
 
   while(true){
     //Aproxima o tempo simulado do tempo real
-    delay(54000);
+    delay(50000);
 
     //Roda a simulação
-    for(int i=0; i<120; i++)
+    for(int i=0; i<12; i++)
     {
       delay(50);
       comunicacaoSerial.enviarDados(dados.calcularDados());
